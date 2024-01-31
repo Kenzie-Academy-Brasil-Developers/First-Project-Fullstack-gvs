@@ -21,8 +21,8 @@ export class ClientService{
         })  
         await clientRepository.save(client)
         return clientSchemaReturn.parse(client)
-    }
-    async list(){
+    } 
+    async list(){ 
         const clients : TClientsRead = await clientRepository.find()
         return clientSchemaReturn.parse(clients)
     }
