@@ -23,7 +23,8 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "typeorm:generate": "typeorm-ts-node-commonjs migration:generate -d src/data-source",
     "typeorm:run": "typeorm-ts-node-common migration:run -d src/data-source",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "build" : "tsc"
   },
   "keywords": [],
   "author": "",
