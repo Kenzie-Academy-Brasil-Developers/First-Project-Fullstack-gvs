@@ -24,8 +24,8 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "typeorm:generate": "npm run typeorm -- migration:generate -d dist/data-source.ts",
     "typeorm:run": "npm run typeorm -- migration:run -d dist/data-source.ts",
-    "start": "node dist/server.js",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   
   "keywords": [],
