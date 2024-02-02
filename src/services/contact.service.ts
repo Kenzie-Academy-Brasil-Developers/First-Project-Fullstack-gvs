@@ -1,35 +1,44 @@
+import { Client } from "../entities/client.entity";
 import { AppError } from "../errors/AppError";
 import { TContact, TContactCreate, TContactUpdate } from "../interfaces/contact.interface";
-import { contactsRepository } from "../repositories";
+import { clientRepository, contactsRepository } from "../repositories";
 import { contactCreateSchema, contactReadSchema, contactSchema, contactUpdateSchema } from "../schemas/contact.schema";
 
 export class ContactService{
-    async createContact(data: TContactCreate){
-        const {completeName, email, phone} = data
-        const foundContact = await contactsRepository.findOne({where: {email}})
-        if (foundContact){
-            throw new AppError('Email already exists.')
+    async create(data: TContactCreate, clientId: string){
+        const client = await clientRepository.findOne({where: {id : clientId}});
+        if(!client){
+            throw new  AppError('Client not found.',404)
         }
-        const foundPhoneContact = await contactsRepository.findOne({ where: { phone } });
-        if (foundPhoneContact) {
-            throw new AppError('Phone number already exists.');
+        const contact = contactsRepository.create({
+            ...data, client
+        })
+        await contactsRepository.save(contact)
+        return contactSchema.parse(contact)
+    }
+    async list(clientId: string){
+        const client = await clientRepository.findOne({
+            where: {id: clientId},
+            relations:{contacts: true}
+        })
+        if(!client){
+            throw new AppError('Client not found.',404)
         }
-
-        const newContact =  contactsRepository.create({...data})
-        await contactsRepository.save(newContact)
-        return contactSchema.parse(newContact)
-    }
-    async list(){
-        const contacts = await contactsRepository.find()
-        return contactReadSchema.parse(contacts);
+        return contactReadSchema.parse(client);
     }
 
-    async update(data: TContactUpdate, contact: TContact){
-        const foundContact = contactsRepository.create({...contact, ...data})
-        const newContact =  contactsRepository.save(foundContact)
-        return contactUpdateSchema.parse(newContact)
+    async update(data: TContactUpdate, contactId: string){
+        const foundContact = await contactsRepository.findOneBy({id: contactId})
+        if (!foundContact) {
+            throw new AppError("Contact not found", 404)
+        }
+        const updateContact = await contactsRepository.create({
+            ...foundContact, ...data
+        })
+        await contactsRepository.save(updateContact)
+        return contactSchema.parse(updateContact)
     }
-    async delete(contactId: string ){
+    async remove(contactId: string ): Promise<void>{
         const foundContact = await contactsRepository.findOne({
             where:{
                 id: contactId,

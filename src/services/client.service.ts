@@ -5,7 +5,7 @@ import { clientRepository } from "../repositories";
 import { clientCreateSchema, clientSchemaReturn, clientUpdateSchema, clientsReadSchema } from "../schemas/client.schema";
 
 export class ClientService{
-    async createClient(data: TClientCreate){
+    async create(data: TClientCreate){
         const { completeName, email, password, phone } = data
         const foundUser = await clientRepository.findOne({
             where: {
@@ -26,12 +26,18 @@ export class ClientService{
         const clients : TClientsRead = await clientRepository.find()
         return clientSchemaReturn.parse(clients)
     }
-    async update(data: TClientUpdate, client: TClient ){
-        const foundClient = clientRepository.create({...client, ...data})
-        const newClient = await clientRepository.save(foundClient)
-        return clientSchemaReturn.parse(newClient)
+    async update(data: TClientUpdate, clientId: string ){
+        const foundClient = clientRepository.findOne({where:{id: clientId}})
+        if(!foundClient){
+            throw new AppError('Client not found', 404)
+        }
+        const updateClient = clientRepository.create({
+            ...foundClient, ...data
+        })
+        await clientRepository.save(updateClient)
+        return clientSchemaReturn.parse(updateClient)
     }
-    async delete(clientId: string ){
+    async remove(clientId: string ){
         const foundClient = await clientRepository.findOne({
             where:{
                 id: clientId,

@@ -13,6 +13,6 @@ export const contactCreateSchema = contactSchema.omit({
     registerDate: true
 })
 
-export const contactUpdateSchema = contactSchema.partial({})
+export const contactUpdateSchema = contactSchema.omit({id:true}).partial()
 
-export const contactReadSchema = contactSchema.array()
+export const contactReadSchema = z.array(contactSchema)
