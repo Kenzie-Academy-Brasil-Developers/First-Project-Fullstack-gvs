@@ -22,8 +22,8 @@
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
-    "typeorm:generate": "npm run typeorm -- migration:generate -d dist/data-source.ts",
-    "typeorm:run": "npm run typeorm -- migration:run -d dist/data-source.ts",
+    "typeorm:generate": "npm run typeorm -- migration:generate -d dist/data-source.js",
+    "typeorm:run": "typeorm-ts-node-commonjs migration:run -d dist/data-source.js",
     "build": "tsc",
     "start": "node dist/server.js"
   },

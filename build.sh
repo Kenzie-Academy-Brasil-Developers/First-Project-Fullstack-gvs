@@ -4,4 +4,4 @@ set -o errexit
 
 npm install
 npm run build
-npm typeorm migration:run dist/data-source.js
+npm run typeorm:run
