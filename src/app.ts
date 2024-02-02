@@ -5,10 +5,9 @@ import { handleAppErrorMiddleware } from "./middlewares/handleAppError.middlewar
 import { clientsRouter } from "./routes/clients.routes"
 import { contactsRouter } from "./routes/contacts.routes"
 import { loginRouter } from "./routes/login.routes"
-const cors = require('cors')
-const fs = require('fs')
-var path = require('path')
+import cors from 'cors'
 const app = express()
+
 
 
 app.use(cors())
