@@ -18,14 +18,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "commonjs",
+  
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
-    "typeorm:generate": "typeorm-ts-node-commonjs migration:generate -d src/data-source.ts",
-    "typeorm:run": "typeorm-ts-node-common migration:run -d src/data-source.ts",
-    "start": "node src/server.ts",
+    "typeorm:generate": "npm run typeorm -- migration:generate -d dist/data-source.ts",
+    "typeorm:run": "npm run typeorm -- migration:run -d dist/data-source.ts",
+    "start": "node dist/server.js",
     "build": "tsc"
   },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",
