@@ -1,0 +1,14 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    color: #F8F9FA ;
+}
+.button{
+    background-color: var(--color-primary-negative);
+    height: 3rem;
+    color: white;
+}
+.button:hover{
+    background-color: var(--color-primary);
+}

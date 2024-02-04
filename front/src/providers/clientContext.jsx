@@ -15,11 +15,11 @@ export function ClientProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
-    const clientId = localStorage.getIte("@CLIENTID");
+    const clientId = localStorage.getItem("@CLIENTID");
 
     async function getClient(clientId) {
       try {
-        const { data } = await api.get(`/client/:${clientId}`, {
+        const { data } = await api.get(`/client/${clientId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -29,12 +29,12 @@ export function ClientProvider({ children }) {
         console.log(err);
       }
     }
-    if (token && userId) {
-      getUser();
+    if (token && clientId) {
+      getClient();
     }
   }, []);
   function clientLogout() {
-    setUser(null);
+    setClient(null);
     localStorage.removeItem("@TOKEN");
     localStorage.removeItem("@CLIENTID");
     navigate("/");
@@ -69,7 +69,6 @@ export function ClientProvider({ children }) {
   return (
     <clientContext.Provider
       value={{
-        loading,
         client,
         setClient,
         clientLogout,
