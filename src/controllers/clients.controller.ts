@@ -10,9 +10,11 @@ export class ClientController{
         return res.status(201).json(newClient)
     }
 
-    async list(_: Request, res: Response) {
-        const clients = await this.clientService.list()
-        return res.json(clients)
+    async list(req: Request, res: Response) {
+        const id = req.params.id
+
+        const client = await this.clientService.list(id)
+        return res.json(client)
     }
     async update(req: Request, res: Response) {
         const reqBody = req.body

@@ -13,7 +13,7 @@ clientsRouter.post(
   (req: Request, res: Response) => clientController.create(req, res)
 );
 
-clientsRouter.get('', (req : Request, res: Response) => clientController.list(req,res) )
+clientsRouter.get('/:id', (req : Request, res: Response) => clientController.list(req,res) )
 clientsRouter.patch(
     '/:id', clientOwnerMiddleware, authMiddleware,
     (req : Request, res: Response)   => clientController.update(req, res)

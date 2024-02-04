@@ -22,10 +22,14 @@ export class ClientService{
         await clientRepository.save(client)
         return clientSchemaReturn.parse(client)
     } 
-    async list(){ 
-        const clients : TClientsRead = await clientRepository.find()
-        return clientSchemaReturn.parse(clients)
+    async list(clientId : string){ 
+        const client = await clientRepository.findOne({where: {id: clientId}})
+        if(!client){
+            throw new AppError('Client not found.',404)
+        }
+        return clientSchemaReturn.parse(client)
     }
+
     async update(data: TClientUpdate, clientId: string ){
         const foundClient = clientRepository.findOne({where:{id: clientId}})
         if(!foundClient){

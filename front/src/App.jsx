@@ -4,8 +4,8 @@ function App() {
 
   return (
     <>
-      
-      
+      <RoutesMain/>
+      <ToastContainer position="bottom-right" autoClose={2000} />
     </>
   )
 }
