@@ -15,7 +15,7 @@ clientsRouter.post(
 
 clientsRouter.get('/:id', (req : Request, res: Response) => clientController.list(req,res) )
 clientsRouter.patch(
-    '/:id', clientOwnerMiddleware, authMiddleware,
+    '/:id', authMiddleware, clientOwnerMiddleware, 
     (req : Request, res: Response)   => clientController.update(req, res)
 )
-clientsRouter.delete('/:id', clientOwnerMiddleware, authMiddleware, (req, res) => clientController.delete(req, res))
+clientsRouter.delete('/:id',  authMiddleware ,clientOwnerMiddleware, (req, res) => clientController.delete(req, res))

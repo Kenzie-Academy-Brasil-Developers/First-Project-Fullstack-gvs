@@ -22,8 +22,9 @@ export class ClientController{
         const updateClient = await this.clientService.update(reqBody, client)
         return res.status(200).json(updateClient)
     }
-    async delete(req: Request, res: Response): Promise<void> {
+    async delete(req: Request, res: Response){
         const client = req.params.id
         const removeClient = await this.clientService.remove(client)
+        return res.status(200)
     }
 }
