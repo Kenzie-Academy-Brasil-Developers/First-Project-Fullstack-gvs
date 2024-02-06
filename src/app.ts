@@ -9,9 +9,9 @@ import cors from 'cors'
 const app = express()
 
 
+app.use(express.json())
 
 app.use(cors())
-app.use(express.json())
 app.use('/client',clientsRouter)
 app.use('/contact' , contactsRouter)
 app.use('/session', loginRouter)

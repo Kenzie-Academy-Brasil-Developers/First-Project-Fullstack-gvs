@@ -4,11 +4,13 @@ export function Login() {
   
   return (
     <main>
+      <div>
+        <div>
+          <img src={logo} alt="Logo" />
+        </div>
+      </div>
       <div >
         <div >
-          <figure>
-            <img src={logo} alt="Logo" />
-          </figure>
           <LoginForm/>
         </div>
       </div>

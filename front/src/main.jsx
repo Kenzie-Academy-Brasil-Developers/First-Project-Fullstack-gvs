@@ -6,10 +6,10 @@ import { ClientProvider } from './providers/clientContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>.
+    <BrowserRouter>
       <ClientProvider>
-        <App />
+          <App />
       </ClientProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

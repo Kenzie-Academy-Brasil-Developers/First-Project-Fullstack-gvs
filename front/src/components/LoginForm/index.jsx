@@ -5,7 +5,7 @@ import { loginFormSchema } from "./loginFormSchema";
 import { InputPass } from "../InputPass";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import style from "./style.module.scss";
+// import style from "./style.module.scss";
 import { clientContext } from "../../providers/clientContext";
 
 export function LoginForm() {
@@ -45,7 +45,7 @@ export function LoginForm() {
         </button>
       <div >
         <p >Ainda nao possui uma conta?</p>
-        <Link to="/register" disabled={loading}>
+        <Link to="/register">
           Cadastre-se
         </Link>
       </div>

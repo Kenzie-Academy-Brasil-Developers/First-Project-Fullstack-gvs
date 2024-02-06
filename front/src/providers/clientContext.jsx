@@ -1,11 +1,10 @@
-import { application } from "express";
 import { useState } from "react";
 import { useEffect } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
-import { setSourceMapRange } from "typescript";
 import { toast } from "react-toastify";
+import { response } from "express";
 
 
 export const clientContext = createContext({});
@@ -14,8 +13,8 @@ export function ClientProvider({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("@TOKEN");
-    const clientId = localStorage.getItem("@CLIENTID");
+    // const token = localStorage.getItem("@TOKEN");
+    // const clientId = localStorage.getItem("@CLIENTID");
 
     async function getClient(clientId) {
       try {
@@ -43,11 +42,14 @@ export function ClientProvider({ children }) {
   async function clientLogin(formData) {
     try {
       const { data } = await api.post("/session/login", formData);
-      toast.success("Login efetuado com sucesso!");
+      const {token} = response.data
+      //api.defaults.headers.common.Authorization = `Bearer ${token}`
+      navigate("/dashboard");
       setClient(data.client);
       localStorage.setItem("@CLIENTID", data.client.id);
       localStorage.setItem("@TOKEN", data.token);
-      navigate("/dashboard");
+      toast.success("Login efetuado com sucesso!");
+
     } catch (error) {
       toast.error("Email ou senha incorreto");
     } 
