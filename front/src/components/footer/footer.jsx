@@ -1,13 +1,9 @@
 export const Footer = () => {
-    return(
-        <footer>
-            <div>
-                <div>
-                    <p>
-                        NetClients
-                    </p>
-                </div>
-            </div>
-        </footer>
-    )
-}
+  return (
+    <footer>
+      <div>
+        <p>NetClients</p>
+      </div>
+    </footer>
+  );
+};

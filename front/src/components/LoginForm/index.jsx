@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema } from "./loginFormSchema";
 import { InputPass } from "../InputPass";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
-// import style from "./style.module.scss";
+import { useContext } from "react";
+import style from "./style.module.scss";
 import { clientContext } from "../../providers/clientContext";
 
 export function LoginForm() {
@@ -23,9 +23,9 @@ export function LoginForm() {
   }
 
   return (
-    <form  onSubmit={handleSubmit(submit)}>
-      <h1>Login</h1>
-      <Input
+    <form className={style.form} onSubmit={handleSubmit(submit)}>
+      <h1 className={style.title}>Login</h1>
+      <Input 
         label="Email"
         type="email"
         register={register("email")}
@@ -38,14 +38,15 @@ export function LoginForm() {
         register={register("password")}
         error={errors.password}
         placeholder="Digite sua senha"
+        type="password"
 
       />
-      <button>
-        "Entrar"
+      <button className={style.button}>
+        Entrar
         </button>
-      <div >
-        <p >Ainda nao possui uma conta?</p>
-        <Link to="/register">
+      <div className={style.bottomform}>
+        <p className={style.p} >Ainda nao possui uma conta?</p>
+        <Link className={style.link} to="/register">
           Cadastre-se
         </Link>
       </div>

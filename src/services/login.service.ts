@@ -26,7 +26,7 @@ export class LoginService{
         }
 
         const token = await sign(
-            {username: foundUser.completeName}, 
+            {clientId: foundUser.id}, 
             process.env.SECRET_KEY!,
             {subject: foundUser.id.toString(),expiresIn: process.env.EXPIRES_IN}
         )

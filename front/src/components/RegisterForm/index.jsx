@@ -3,60 +3,59 @@ import { Input } from "../Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormSchema } from "./registerFormSchema.js";
 import { InputPass } from "../InputPass";
-import { Select } from "../Select";
-import { useState } from "react";
 import style from "./style.module.scss";
 import { useContext } from "react";
-import { UserContext } from "../../../providers/userContext";
+import { clientContext } from "../../providers/clientContext";
 export function RegisterForm() {
-  const {userRegister} = useContext(UserContext)
-  const [loading, setLoading] = useState(false);
+  const {clientRegister} = useContext(clientContext)
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    //formState: { errors },
   } = useForm({ 
-    resolver: zodResolver(registerFormSchema),
+    //resolver: zodResolver(registerFormSchema),
   });
   
   function submit(formData) {
-    userRegister(formData, setLoading);
+    const formTransformed = {...formData, phone: Number(formData.phone)}
+    clientRegister(formTransformed);
   }
   return (
-    <form  onSubmit={handleSubmit(submit)}>
+    <form className={style.form} onSubmit={handleSubmit(submit)}>
       <div >
         <h1>Crie sua conta</h1>
         <p>Rapido e grátis, vamos nessa</p>
       </div>
       <Input
-        label="Nome"
-        type="text"
+        label="Nome Completo"
+        type="completeName"
         register={register("completeName")}
         placeholder="Digite seu nome completo"
-        error={errors.completeName}
+        //error={errors.completeName}
       />
       <Input
         label="Email"
         type="email"
         register={register("email")}
         placeholder="Digite seu email"
-        error={errors.email}
+        //error={errors.email}
       />
       <InputPass
         label="Senha"
+        type="password"
         register={register("password")}
-        error={errors.password}
+        //error={errors.password}
       />
       <Input
         label="Phone"
+        type= "phone"
         register={register("phone")}
-        error={errors.phone}
         placeholder="Phone number"
+        //error={errors.phone}
       />
-      
-      <button>
-         "Cadastrar"
-      </button>
+      <button className={style.button}>
+        Cadastrar
+        </button>
     </form>
   );
 }

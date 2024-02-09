@@ -5,7 +5,7 @@ export function InputPass({ error, label, register, disabled }) {
   const [isHidden, setIsHidden] = useState(true);
 
   return (
-    <div >
+    <div className={style.inputBox}>
       <label >{label}</label>
       <div >
         <input
@@ -14,12 +14,9 @@ export function InputPass({ error, label, register, disabled }) {
           disabled={disabled}
           placeholder="Digite sua senha"
         />
-        <button type="button" onClick={() => setIsHidden(!isHidden)}>
-          {isHidden ? <MdVisibility /> : <MdVisibilityOff />}
-        </button>
 
       </div>
-      {error ? <p>{error.message}</p> : null}
+      {error ? <p className={style.error}>{error.message}</p> : null}
     </div>
   );
 }

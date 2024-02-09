@@ -5,7 +5,7 @@ export const clientSchema = z.object({
     completeName: z.string(),
     email: z.string().email(),
     password: z.string().min(1).max(120),
-    phone:  z.number().positive(),
+    phone: z.number(),
     registerDate: z.string(),
 })
 export const clientCreateSchema = clientSchema.omit({

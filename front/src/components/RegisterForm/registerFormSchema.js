@@ -10,8 +10,8 @@ export const registerFormSchema = z.object({
     .string()
     .nonempty("Senha obrigatoria!")
     .min(8, "Sao necessarios pelo menos oito caracteres")
-    .regex(/[A-Z]+/, "E necessario ao menos uma letra maiuscula")
-    .regex(/[a-z]+/, "E necessario ao menos uma letra minuscula")
-    .regex(/[0-9]+/, "E necessario ao menos um numero"),
-  phone: z.string().nonempty("Escreva um numero de telefone"),
+    .regex(/[A-Z]+/, "E necessario uma letra maiuscula")
+    .regex(/[a-z]+/, "E necessario uma letra minuscula")
+    .regex(/[0-9]+/, "E necessario um numero"),
+  phone: z.number(),
 })

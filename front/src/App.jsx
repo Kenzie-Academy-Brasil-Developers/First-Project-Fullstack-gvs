@@ -1,13 +1,15 @@
 import { RoutesMain } from "./routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-
+import { ClientProvider} from "./providers/clientContext";
 function App(){
 
   return (
     <>
-      <RoutesMain/>
-      <ToastContainer position="bottom-right" autoClose={2000} />
+      <ToastContainer autoClose={2000}/>
+      <ClientProvider>
+        <RoutesMain/>
+      </ClientProvider>
     </>
   )
 }

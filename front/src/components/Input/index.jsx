@@ -1,7 +1,7 @@
 import style from "./style.module.scss";
 export function Input({ error, label, type, register, disabled , placeholder }) {
   return (
-    <div>
+    <div className={style.inputBox}>
       <label>{label}</label>
       <input
         type={type}
@@ -9,7 +9,7 @@ export function Input({ error, label, type, register, disabled , placeholder }) 
         disabled={disabled}
         placeholder={placeholder}
       />
-      {error ? <p>{error.message}</p> : null}
+      {error ? <p className={style.erro}>{error.message}</p> : null}
     </div>
   );
 }

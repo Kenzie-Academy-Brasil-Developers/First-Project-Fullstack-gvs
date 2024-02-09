@@ -4,17 +4,17 @@ import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
-import { response } from "express";
-
-
+import { jwtDecode } from "jwt-decode";
 export const clientContext = createContext({});
 export function ClientProvider({ children }) {
   const [client, setClient] = useState(null);
+  const token = localStorage.getItem('@TOKEN')
   const navigate = useNavigate();
+  const dataClient = localStorage.getItem('@DATACLIENT')
 
   useEffect(() => {
-    // const token = localStorage.getItem("@TOKEN");
-    // const clientId = localStorage.getItem("@CLIENTID");
+    const token = localStorage.getItem("@TOKEN");
+    const clientId = localStorage.getItem("@CLIENTID");
 
     async function getClient(clientId) {
       try {
@@ -27,9 +27,9 @@ export function ClientProvider({ children }) {
       } catch (err) {
         console.log(err);
       }
-    }
-    if (token && clientId) {
+      if (token && clientId) {
       getClient();
+      }
     }
   }, []);
   function clientLogout() {
@@ -40,43 +40,58 @@ export function ClientProvider({ children }) {
   }
 
   async function clientLogin(formData) {
+    const token = localStorage.getItem("@TOKEN");
+    console.log('TOKENNN')
+    if(token){
+      const clientId = JSON.parse(atob(token.split(".")[1]));
+      console.log(clientId);
+    }
+    //const decodedToken = jwtDecode(token)
+    //console.log(decodedToken);
     try {
-      const { data } = await api.post("/session/login", formData);
-      const {token} = response.data
+      //getClient(clientId)
+      const {data} = await api.post("/session/login", formData)
+      //console.log(data);
+      navigate("/dashboard")
+      //const { token } = data
       //api.defaults.headers.common.Authorization = `Bearer ${token}`
-      navigate("/dashboard");
-      setClient(data.client);
-      localStorage.setItem("@CLIENTID", data.client.id);
-      localStorage.setItem("@TOKEN", data.token);
-      toast.success("Login efetuado com sucesso!");
-
+      localStorage.setItem("@TOKEN", data.token)
+      localStorage.setItem('@CLIENTID', data.id)
+      toast("Login successfully!");
     } catch (error) {
-      toast.error("Email ou senha incorreto");
-    } 
+      toast.error("Login failed!");
+    }
   }
-  async function clientRegister(formData) {
+  async function clientRegister(data) {
     try {
-      await api.post("/client", formData);
+      const response = await api.post("/client", data);
+      console.log(response);
+      //setClient(response.data)
+      console.log(data);
       toast.success("Conta cadastrada com sucesso");
-      navigate("/session/login");
-    } catch (error) {
+      navigate('/')
+    }catch (error) {
+      console.log(error);
       toast.error("Ops, algo deu errado!");
       if (error.response?.data === "Email already exists") {
         toast.error("Email already exists!");
-      }
-    } 
+      }}
+      if(error.response?.data === "Number already exists") {
+        toast.error("Email already exists!");
+
+    }
   }
-  
 
   return (
     <clientContext.Provider
       value={{
+        clientRegister,
         client,
         setClient,
         clientLogout,
         clientLogin,
         navigate,
-        clientRegister,
+        
       }}
     >
       {children}
