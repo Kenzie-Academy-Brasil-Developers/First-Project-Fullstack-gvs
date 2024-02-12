@@ -4,59 +4,59 @@ import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
-import { jwtDecode } from "jwt-decode";
 export const clientContext = createContext({});
 export function ClientProvider({ children }) {
   const [client, setClient] = useState(null);
-  const token = localStorage.getItem('@TOKEN')
   const navigate = useNavigate();
-  const dataClient = localStorage.getItem('@DATACLIENT')
-
-  useEffect(() => {
-    const token = localStorage.getItem("@TOKEN");
-    const clientId = localStorage.getItem("@CLIENTID");
-
-    async function getClient(clientId) {
+  const token = localStorage.getItem("@TOKEN");
+  
+  
+  async function getClient() {
+    try {
+      const { data } = await api.get(`/client/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setClient(data);
+      navigate("/dashboard")
+    } catch (err) {
+      console.log(err);
+    }
+    if (token) {
+    getClient();
+    }
+  }
+  useEffect(()=> {
+    async function getClient() {
       try {
-        const { data } = await api.get(`/client/${clientId}`, {
+        const { data } = await api.get(`/client`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         setClient(data);
+        navigate("/dashboard")
       } catch (err) {
         console.log(err);
       }
-      if (token && clientId) {
-      getClient();
-      }
     }
-  }, []);
+    if (token) {
+    getClient();
+    }
+  },[])
   function clientLogout() {
     setClient(null);
     localStorage.removeItem("@TOKEN");
-    localStorage.removeItem("@CLIENTID");
     navigate("/");
   }
 
   async function clientLogin(formData) {
-    const token = localStorage.getItem("@TOKEN");
-    console.log('TOKENNN')
-    if(token){
-      const clientId = JSON.parse(atob(token.split(".")[1]));
-      console.log(clientId);
-    }
-    //const decodedToken = jwtDecode(token)
-    //console.log(decodedToken);
     try {
-      //getClient(clientId)
       const {data} = await api.post("/session/login", formData)
-      //console.log(data);
-      navigate("/dashboard")
-      //const { token } = data
-      //api.defaults.headers.common.Authorization = `Bearer ${token}`
+      getClient()
       localStorage.setItem("@TOKEN", data.token)
-      localStorage.setItem('@CLIENTID', data.id)
+      navigate("/dashboard")
       toast("Login successfully!");
     } catch (error) {
       toast.error("Login failed!");

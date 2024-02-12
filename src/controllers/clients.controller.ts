@@ -11,19 +11,19 @@ export class ClientController{
     }
 
     async list(req: Request, res: Response) {
-        const id = req.params.id
+        const id = res.locals.clientId
 
         const client = await this.clientService.list(id)
         return res.json(client)
     }
     async update(req: Request, res: Response) {
         const reqBody = req.body
-        const client = req.params.id
+        const client = res.locals.clientId
         const updateClient = await this.clientService.update(reqBody, client)
         return res.status(200).json(updateClient)
     }
     async delete(req: Request, res: Response){
-        const client = req.params.id
+        const client = res.locals.clientId
         const removeClient = await this.clientService.remove(client)
         return res.status(200)
     }

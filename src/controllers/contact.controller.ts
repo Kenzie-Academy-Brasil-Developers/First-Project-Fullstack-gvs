@@ -27,4 +27,13 @@ export class ContactController{
         const contactId = req.params.id
         await this.contactService.remove(contactId)
         return res.status(204).send()
-    }}
+    }
+    
+    async listAll(req: Request, res: Response) {
+        const contacts = await this.contactService.listAll()
+        return res.json(contacts).status(200)
+    }
+}
+
+
+    

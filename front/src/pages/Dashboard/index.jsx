@@ -7,12 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { clientContext } from "../../providers/clientContext";
 
-// import style from "./style.module.scss";
+import style from "./style.module.scss";
 export function Dashboard() {
   const {client} = useContext(clientContext)
+
   const navigate = useNavigate()
   const [contacts, setContacts] = useState([])
   const localStorageContacts = localStorage.getItem("@CONTACTSLIST")
+  //const clientToOneLetter = client.completeName.charAt(0)
   async function getContactsList() {
     try {
       const { data } = await api.get("/contact");
@@ -34,15 +36,16 @@ export function Dashboard() {
 
   
   return (
-    <main>
+    <main className={style.main}>
       <Header/>
-      <section>
-          <div>
-            <ContactList contactList={contacts} />
-            {client && (<p>{client.completeName}</p>)}
-          </div>
-      </section>
-      <Footer/>
+      <div className={style.dashboard}>
+        <section >
+            <div>
+              <ContactList contactList={contacts}/>
+            </div>
+        </section>
+        <Footer/>
+      </div>
     </main>
   );
 }

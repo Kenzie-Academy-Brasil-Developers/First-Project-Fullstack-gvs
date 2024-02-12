@@ -16,6 +16,7 @@ contactsRouter.post(
   (req, res) => contactController.create(req, res)
 );
 contactsRouter.get("/:id", (req, res) => contactController.list(req, res));
+contactsRouter.get("", (req, res) => contactController.listAll(req, res));
 contactsRouter.patch(
   "/:id",
   contactOwnerMiddleware,

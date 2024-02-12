@@ -12,10 +12,11 @@ clientsRouter.post(
   dataIsValidMiddleware(clientCreateSchema),
   (req: Request, res: Response) => clientController.create(req, res)
 );
-
-clientsRouter.get('/:id', (req : Request, res: Response) => clientController.list(req,res) )
-clientsRouter.patch(
-    '/:id', authMiddleware, clientOwnerMiddleware, 
-    (req : Request, res: Response)   => clientController.update(req, res)
-)
-clientsRouter.delete('/:id',  authMiddleware ,clientOwnerMiddleware, (req, res) => clientController.delete(req, res))
+clientsRouter.use(authMiddleware);
+clientsRouter.get("", (req: Request, res: Response) =>
+  clientController.list(req, res)
+);
+clientsRouter.patch("", (req: Request, res: Response) =>
+  clientController.update(req, res)
+);
+clientsRouter.delete("", (req, res) => clientController.delete(req, res));

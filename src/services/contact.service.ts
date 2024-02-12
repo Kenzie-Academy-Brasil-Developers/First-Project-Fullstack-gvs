@@ -1,3 +1,4 @@
+import { listenerCount } from "process";
 import { Client } from "../entities/client.entity";
 import { AppError } from "../errors/AppError";
 import { TContact, TContactCreate, TContactUpdate } from "../interfaces/contact.interface";
@@ -7,8 +8,13 @@ import { contactCreateSchema, contactReadSchema, contactSchema, contactUpdateSch
 export class ContactService{
     async create(data: TContactCreate, clientId: string){
         const client = await clientRepository.findOne({where: {id : clientId}});
+
         if(!client){
             throw new  AppError('Client not found.',404)
+        }
+        const foundEqualContact = await contactsRepository.findOne({where: {phone : data.phone}})
+        if(foundEqualContact){
+            throw new AppError('Not possible add this contact!', 401)
         }
         const contact = contactsRepository.create({
             ...data, client
@@ -48,4 +54,10 @@ export class ContactService{
             throw new AppError('Contact not found.',404)
         }
         await contactsRepository.remove(foundContact)
-    }}
+    }
+    async listAll(){
+        const contacts = await contactsRepository.find()
+        return contactReadSchema.parse(contacts)
+    }
+
+}

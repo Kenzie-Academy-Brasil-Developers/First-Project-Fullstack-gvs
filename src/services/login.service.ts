@@ -13,7 +13,7 @@ export class LoginService{
         const {email, password} = data
         const foundUser = await clientRepository.findOne({
             where:{
-                email
+                email 
             }
         })
         if(!foundUser){
