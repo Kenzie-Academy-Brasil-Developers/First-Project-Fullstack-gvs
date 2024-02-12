@@ -1,16 +1,18 @@
+import { useContext } from "react";
 import { ContactCard } from "./ContactCard";
-import style from "./style.module.scss";
-export const ContactList = ({ contactList }) => {
+import { contactContext } from "../../providers/contactContext";
+export const ContactList = ({contacts}) => {
   return (
-    <section >
+    <section>
       <div>
         <ul>
-          {contactList.map((contact) => (
+          {contacts?.map((contact) => (
             <ContactCard
               key={contact.id}
               contact={contact}
             />
           ))}
+          
         </ul>
       </div>
     </section>

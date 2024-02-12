@@ -68,11 +68,11 @@ export function ClientProvider({ children }) {
       console.log(response);
       //setClient(response.data)
       console.log(data);
-      toast.success("Conta cadastrada com sucesso");
+      toast.success("Account registered successfully!");
       navigate('/')
     }catch (error) {
       console.log(error);
-      toast.error("Ops, algo deu errado!");
+      toast.error("Ops, Something went wrong!");
       if (error.response?.data === "Email already exists") {
         toast.error("Email already exists!");
       }}
