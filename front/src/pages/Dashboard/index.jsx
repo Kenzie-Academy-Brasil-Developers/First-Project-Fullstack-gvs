@@ -4,9 +4,10 @@ import { ContactList } from "../../components/ContactList";
 import style from "./style.module.scss";
 import { useContext } from "react";
 import { contactContext } from "../../providers/contactContext";
+import { CreateContactModal } from "../../components/ContactFormModal";
 
 export function Dashboard() {
-  const {contacts} = useContext(contactContext)
+  const {contacts, setVisible, visible} = useContext(contactContext)
   return (
     <main className={style.main}>
       <Header/>
@@ -15,10 +16,13 @@ export function Dashboard() {
             <div>
               <ContactList contacts={contacts}/>
             </div>
-            {/* <button onClick={() => postContact()}>Adicionar contato</button> */}
+            <button className={style.buttonAdd} onClick={() => setVisible(true)}>Adicionar contato</button>
+            {visible ? <CreateContactModal/> : null} 
         </section>
         <Footer/>
       </div>
     </main>
   );
 }
+
+

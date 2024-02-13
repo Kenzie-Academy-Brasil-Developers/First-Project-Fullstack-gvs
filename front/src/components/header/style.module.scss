@@ -6,7 +6,6 @@
     display: flex;
     justify-content: space-between;
     width: 100vw;
-    max-width: 1720px;
     margin: 0 auto;
     padding: 1rem;
     align-items: center;
@@ -14,6 +13,7 @@
     position: fixed; 
     top: 0;
     z-index: 1000;
+    background-color: #fff;
     
 }
 
@@ -21,6 +21,7 @@
     display: flex;
     gap: 1rem;
     justify-content: center;
+    width: 160px;
 }
 .clientName{
     border: 3px solid;

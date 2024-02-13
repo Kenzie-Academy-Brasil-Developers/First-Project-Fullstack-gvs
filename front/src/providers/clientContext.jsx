@@ -43,6 +43,8 @@ export function ClientProvider({ children }) {
     }
     if (token) {
     getClient();
+    }else{
+      navigate('/')
     }
   },[])
   function clientLogout() {

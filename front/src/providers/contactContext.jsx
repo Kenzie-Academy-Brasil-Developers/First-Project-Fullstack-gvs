@@ -19,9 +19,10 @@ export function ContactProvider({ children }) {
     try {
       const {data} = await api.post('/contact', formData, {
         headers: {
-          Authorization : `Bearer + ${token}`
+          Authorization : `Bearer ${token}`
         }
       })
+      console.log(data);
       setContacts([...contacts, data])
       toast.success('Contact are registered!')
       setVisible(false)
@@ -69,7 +70,7 @@ export function ContactProvider({ children }) {
       navigate("/dashboard")
 
     } catch (error) {
-      toast.error('Is not a possible delete this contact!')
+      toast.error('Is not a possible update this contact!')
     }
   }
 
@@ -91,7 +92,7 @@ export function ContactProvider({ children }) {
     if(token){
       getAllContacts()
     }
-  }, [contacts]);
+  }, []);
 
 
   return (

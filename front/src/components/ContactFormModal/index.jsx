@@ -1,43 +1,62 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { TechContext } from "../../../providers/techContext";
 import { Input } from "../Input";
-import { SelectTech } from "../SelectTech";
-import { TechFormSchema } from "./TechFormSchema";
-import style from "./style.module.scss"
+import { ContactFormSchema } from "./ContactFormSchema";
+import style from "./style.module.scss";
+import { contactContext } from "../../providers/contactContext";
 
-export function TechFormModal(){
-  const [loading, setLoading] = useState(false);
-  const {postTech} = useContext(TechContext)
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm({
-        resolver: zodResolver(TechFormSchema)
-      });
+export function CreateContactModal() {
+  const { setVisible, visible, postContact } = useContext(contactContext);
 
-      function submit(formData) {
-         postTech(formData);
-      }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    //resolver: zodResolver(ContactFormSchema),
+  });
 
-    return(
-        <form className={style.form} onSubmit={handleSubmit(submit)}>
-           <Input
-           label="Nome"
-           type="text"
-           register={register("title")}
-           placeholder="Digite um titulo"
-           error={errors.title}
-           disabled={loading}/>
+  function submit(formData) {
+    const formTransformed = { ...formData, phone: Number(formData.phone) };
+    postContact(formTransformed);
+  }
 
-           <SelectTech
-            label="Selecionar status"
-            register={register("status")}
-            disabled={loading}
-           />
-           <button className={style.button}>Cadastrar Tecnologia</button>
+  return (
+    <div className={style.modal}  role="dialog">
+      <div className={style.container}>
+        <form onSubmit={handleSubmit(submit)}>
+          <div className={style.header}>
+            <h3 className={style.title}>Salvar contato</h3>
+            <button className={style.button} onClick={() => setVisible(false)}>X</button>
+          </div>
+          <div className={style.form}>
+            <Input
+              label="Nome Completo"
+              type="completeName"
+              register={register("completeName")}
+              placeholder="Digite seu nome completo"
+              //error={errors.completeName}
+            />
+            <Input
+              label="Email"
+              type="email"
+              register={register("email")}
+              placeholder="Digite seu email"
+              //error={errors.email}
+            />
+
+            <Input
+              label="Phone"
+              register={register("phone")}
+              placeholder="Phone number"
+              //error={errors.phone}
+            />
+            <button className={style.button}>Cadastrar contato</button>
+
+          </div>
         </form>
-    )
+      </div>
+    </div>
+  );
 }
