@@ -11,23 +11,25 @@ export function ClientProvider({ children }) {
   const token = localStorage.getItem("@TOKEN");
   
   
-  async function getClient() {
-    try {
-      const { data } = await api.get(`/client/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setClient(data);
-      navigate("/dashboard")
-    } catch (err) {
-      console.log(err);
-    }
-    if (token) {
-    getClient();
-    }
-  }
+   async function getClient() {
+     try {
+       const { data } = await api.get(`/client`, {
+         headers: {
+           Authorization: `Bearer ${token}`,
+         },
+       });
+       setClient(data);
+       navigate("/dashboard")
+     } catch (err) {
+       console.log(err);
+     }
+     if (token) {
+       getClient();
+     }
+   }
   useEffect(()=> {
+    const token = localStorage.getItem("@TOKEN");
+
     async function getClient() {
       try {
         const { data } = await api.get(`/client`, {
@@ -42,11 +44,11 @@ export function ClientProvider({ children }) {
       }
     }
     if (token) {
-    getClient();
+      getClient();
     }else{
       navigate('/')
     }
-  },[])
+  },[token])
   function clientLogout() {
     setClient(null);
     localStorage.removeItem("@TOKEN");
@@ -56,7 +58,6 @@ export function ClientProvider({ children }) {
   async function clientLogin(formData) {
     try {
       const {data} = await api.post("/session/login", formData)
-      getClient()
       localStorage.setItem("@TOKEN", data.token)
       navigate("/dashboard")
       toast("Login successfully!");
