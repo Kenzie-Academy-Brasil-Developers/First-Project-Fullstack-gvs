@@ -1,5 +1,9 @@
 # First-Project-Fullstack-gvs
 
+# Ao entrar na pagina no frontend, recarregar a pagina para conseguir renderizar, pois nao fiz logica de loading, entao nao carrega instantaneamente os elementos na tela!
+
+# Atencao com o arquivo .env para conseguir rodar a aplicacao corretamente! 
+
 # Libs para instalar nas dependencias dev: 
 "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
