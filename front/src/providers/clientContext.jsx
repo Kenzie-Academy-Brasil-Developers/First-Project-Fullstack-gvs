@@ -5,28 +5,28 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
 export const clientContext = createContext({});
-export function ClientProvider({ children }) {
+export function ClientProvider({ children }){ 
   const [client, setClient] = useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem("@TOKEN");
   
   
-   async function getClient() {
-     try {
-       const { data } = await api.get(`/client`, {
-         headers: {
-           Authorization: `Bearer ${token}`,
-         },
-       });
-       setClient(data);
-       navigate("/dashboard")
-     } catch (err) {
-       console.log(err);
-     }
-     if (token) {
-       getClient();
-     }
-   }
+  //  async function getClient() {
+  //    try {
+  //      const { data } = await api.get(`/client`, {
+  //        headers: {
+  //          Authorization: `Bearer ${token}`,
+  //        },
+  //      });
+  //      setClient(data);
+  //      navigate("/dashboard")
+  //    } catch (err) {
+  //      console.log(err);
+  //    }
+  //    if (token) {
+  //      getClient();
+  //    }
+  //  }
   useEffect(()=> {
     const token = localStorage.getItem("@TOKEN");
 
