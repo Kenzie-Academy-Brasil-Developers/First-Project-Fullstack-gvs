@@ -53,7 +53,10 @@ export const clientCreateSchema = clientSchema.omit({
 export const clientUpdateSchema = clientSchema.partial()
 
 export const clientSchemaReturn = clientSchema.omit({
-    password: true
+    password: true,
+    phone: true,
+}).extend({
+        phone: z.number().or(z.string()),
 })
 export const clientsReadSchema = z.array(clientSchemaReturn)
 
