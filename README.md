@@ -1,9 +1,9 @@
 # First-Project-Fullstack-gvs
 
-# Ao entrar na pagina no frontend eu estava tendo problemas ao carregar o icone de usuario, recarregar a pagina para conseguir renderizar estava sendo uma alternativa, pois nao fiz logica de loading, entao nao carrega instantaneamente os elementos na tela!
-# Em meu ultimo commit tentei ajustar esse problema, aparentemente esta tudo certo! 
-
-# Atencao com o arquivo .env para conseguir rodar a aplicacao corretamente! 
+# Comandos para inicializar o projeto
+ # 1: npm install 
+ # 2: npm run build
+ # 3: npm run dev
 
 # Libs para instalar nas dependencias dev: 
 "devDependencies": {
