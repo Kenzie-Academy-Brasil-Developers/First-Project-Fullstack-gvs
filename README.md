@@ -5,6 +5,10 @@
  # 2: npm run build
  # 3: npm run dev
 
+# Para acessar a rota da documentacao:
+  # http://localhost:3000/docs/#/
+
+
 # Libs para instalar nas dependencias dev: 
 "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
