@@ -74,15 +74,8 @@ export function ClientProvider({ children }){
       toast.success("Account registered successfully!");
       navigate('/')
     }catch (error) {
-      console.log(error);
       toast.error("Ops, Something went wrong!");
-      if (error.response?.data === "Email already exists") {
-        toast.error("Email already exists!");
-      }}
-      if(error.response?.data === "Number already exists") {
-        toast.error("Email already exists!");
-
-    }
+      }
   }
 
   return (
