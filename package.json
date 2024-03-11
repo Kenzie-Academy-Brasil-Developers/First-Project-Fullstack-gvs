@@ -22,13 +22,13 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "ts-node-dev --ignore-watch node_modules /server.ts",
+    "dev": "ts-node-dev --ignore-watch node_modules ./server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
-    "typeorm:generate": "npm run typeorm -- migration:generate -d /data-source.ts",
-    "typeorm:run": "typeorm-ts-node-commonjs migration:run -d /data-source.ts",
+    "typeorm:generate": "npm run typeorm -- migration:generate -d ./data-source.ts",
+    "typeorm:run": "typeorm-ts-node-commonjs migration:run -d ./data-source.ts",
     "build": "tsc",
-    "start": "node /server.ts",
-    "typeorm:rundev": "typeorm-ts-node-commonjs migration:run -d /data-source.ts"
+    "start": "node ./server.ts",
+    "typeorm:rundev": "typeorm-ts-node-commonjs migration:run -d ./data-source.ts"
   },
   "keywords": [],
   "author": "",
