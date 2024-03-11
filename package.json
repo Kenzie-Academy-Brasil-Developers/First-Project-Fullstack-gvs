@@ -24,10 +24,10 @@
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
-    "typeorm:generate": "npm run typeorm -- migration:generate -d src/data-source.js",
-    "typeorm:run": "typeorm-ts-node-commonjs migration:run -d src/data-source.js",
+    "typeorm:generate": "npm run typeorm -- migration:generate -d src/data-source.ts",
+    "typeorm:run": "typeorm-ts-node-commonjs migration:run -d src/data-source.ts",
     "build": "tsc",
-    "start": "node src/server.js",
+    "start": "node src/server.ts",
     "typeorm:rundev": "typeorm-ts-node-commonjs migration:run -d src/data-source.ts"
   },
   "keywords": [],
