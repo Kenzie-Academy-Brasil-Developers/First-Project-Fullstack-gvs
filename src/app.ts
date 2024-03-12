@@ -8,12 +8,8 @@ import { contactsRouter } from "./routes/contacts.routes"
 import { loginRouter } from "./routes/login.routes"
 import cors from 'cors'
 const app = express()
-
-
 app.use(express.json())
-
-app.use(cors({origin: 'https://netclient-gvs.onrender.com'}))
-
+app.use(cors({origin:'https://localhost:3000'}))
 app.use('/client',clientsRouter)
 app.use('/contact' , contactsRouter)
 app.use('/session', loginRouter)

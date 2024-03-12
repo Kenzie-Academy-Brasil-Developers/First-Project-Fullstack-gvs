@@ -8,8 +8,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const typeorm_1 = require("typeorm");
 require("dotenv/config");
 const DataSourceConfig = () => {
-    const entitiesPath = node_path_1.default.join(__dirname, "entities/*.{ts, js}");
-    const migrationsPath = node_path_1.default.join(__dirname, "migrations/*.{ts, js}");
+    const entitiesPath = node_path_1.default.join(__dirname, "./entities/**.{ts, js}");
+    const migrationsPath = node_path_1.default.join(__dirname, "./migrations/**.{ts, js}");
     if (!process.env.DATABASE_URL) {
         throw new Error("Env var DATABASE_URL does not exists");
     }

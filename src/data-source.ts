@@ -4,8 +4,8 @@ import "dotenv/config"
 
 
 const DataSourceConfig = (): DataSourceOptions => {
-    const entitiesPath = path.join(__dirname, "entities/*.{ts, js}")
-    const migrationsPath = path.join(__dirname, "migrations/*.{ts, js}")
+    const entitiesPath = path.join(__dirname, "./entities/**.{ts, js}")
+    const migrationsPath = path.join(__dirname, "./migrations/**.{ts, js}")
 
     if (!process.env.DATABASE_URL) {
         throw new Error("Env var DATABASE_URL does not exists")

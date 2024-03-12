@@ -22,7 +22,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "ts-node-dev --ignore-watch node_modules ./server.ts",
+    "dev": "ts-node-dev --ignore-watch node_modules ./src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "typeorm:generate": "typeorm-ts-node-commonjs migration:generate -d ./dist/src/data-source.js",
     "typeorm:run": "typeorm-ts-node-commonjs migration:run -d ./dist/src/data-source.js",

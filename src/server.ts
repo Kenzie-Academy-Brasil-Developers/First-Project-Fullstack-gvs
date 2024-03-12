@@ -3,7 +3,7 @@ import "dotenv/config"
 import { AppDataSource } from "./data-source"
 import swaggerDocs from "./utils/swagger";
 
-
+    
 AppDataSource.initialize()
     .then(() => {
         console.log("database is running")
