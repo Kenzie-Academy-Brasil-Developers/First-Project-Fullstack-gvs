@@ -28,7 +28,7 @@
     "typeorm:run": "typeorm-ts-node-commonjs migration:run -d ./dist/src/data-source.js",
     "build": "tsc",
     "start": "node dist/src/server.js",
-    "typeorm:rundev": "typeorm-ts-node-commonjs migration:run -d ./dist/data-source.ts"
+    "typeorm:rundev": "typeorm-ts-node-commonjs migration:run -d ./dist/data-source.js"
   },
   "keywords": [],
   "author": "",
